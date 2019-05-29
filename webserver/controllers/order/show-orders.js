@@ -14,23 +14,38 @@ async function showUserOrders(req, res, next) {
 
     try {
         const connection = await mysqlPool.getConnection();
+
         const [orderData] = await connection.query(
-            `SELECT U.idUser, O.orderDate, E.title, E.price
+            `SELECT U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate 
             FROM users U
             JOIN \`order\` O ON O.idUser = U.idUser
             JOIN experiences E on E.idExperience = O.idExperience
-            WHERE U.idUser = '${idUser}'
+            WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NOT NULL
             ORDER BY U.idUser;`
-        );
+        ); // Muestra solo las que están confirmadas
+
+        // const [orderData] = await connection.query(
+        //     `SELECT U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate
+        //     FROM users U
+        //     JOIN \`order\` O ON O.idUser = U.idUser
+        //     JOIN experiences E on E.idExperience = O.idExperience
+        //     WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NULL
+        //     ORDER BY U.idUser;`
+        // ); //  Muestra las experiencias añadidas a la cesta (aún sin confirmar)
+
         console.log(orderData);
         console.log(idUser);
         connection.release();
 
         const data = orderData.map(orderItem => {
             return {
-                orderDate: orderItem.orderDate,
+                idUser: idUser,
+                idExperience: orderItem.idExperience,
                 title: orderItem.title,
-                price: orderItem.price
+                units: orderItem.units,
+                price: orderItem.price,
+                comments: orderItem.comments,
+                orderDate: orderItem.orderDate
             };
         });
 
