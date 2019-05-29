@@ -1,8 +1,19 @@
-'use strict';
+"use strict";
 
-const mysql = require('mysql2');
+const mysql = require("mysql2");
+
+const sslCertificate = process.env.MYSQL_SSL_CERTIFICATE;
 
 async function connect() {
+    const sslCertificateData = sslCertificate ?
+        fs.readFileSync(sslCertificate) :
+        null;
+    const sslOptions = {
+        ssl: {
+            ca: sslCertificateData
+        }
+    };
+
     const options = {
         connectionLimit: 10,
         host: process.env.MYSQL_HOST,
@@ -10,9 +21,10 @@ async function connect() {
         password: process.env.MYSQL_PASSWORD,
         database: process.env.MYSQL_DATABASE,
         port: process.env.MYSQL_PORT,
-        timezone: 'Z',
+        timezone: "Z",
         // debug: true,
         multipleStatements: true,
+        ...(sslCertificateData && sslOptions)
     };
 
     /**
@@ -27,14 +39,16 @@ async function connect() {
             connection.release(); // Reconexion
         }
     } catch (e) {
-        console.error('mysql pool connect', e);
+        console.error("mysql pool connect", e);
         throw e;
     }
 }
 
 async function getConnection() {
     if (this.pool === null) {
-        throw new Error("MySQL connection didn't established. You must connect first.");
+        throw new Error(
+            "MySQL connection didn't established. You must connect first."
+        );
     }
 
     const connection = await this.pool.getConnection();
@@ -44,5 +58,5 @@ async function getConnection() {
 
 module.exports = {
     connect,
-    getConnection,
+    getConnection
 };
