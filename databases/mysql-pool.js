@@ -1,6 +1,7 @@
 "use strict";
 
 const mysql = require("mysql2");
+const fs = require("fs");
 
 const sslCertificate = process.env.MYSQL_SSL_CERTIFICATE;
 
