@@ -1,7 +1,6 @@
 "use strict";
 
 const mysql = require("mysql2");
-const fs = require("fs");
 
 const sslCertificate = process.env.MYSQL_SSL_CERTIFICATE;
 
@@ -28,11 +27,6 @@ async function connect() {
         ...(sslCertificateData && sslOptions)
     };
 
-    console.log("HOST: ", process.env.MYSQL_HOST);
-    console.log("USER: ", process.env.MYSQL_USER);
-    // console.log("PASSWORD: ", process.env.MYSQL_PASSWORD);
-    console.log("DATABASE: ", process.env.MYSQL_DATABASE);
-    console.log("PORT: ", process.env.MYSQL_PORT);
     /**
      * Crear connection pool y promisifico para usar async / await
      */
