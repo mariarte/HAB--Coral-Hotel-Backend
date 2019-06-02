@@ -16,13 +16,13 @@ async function showUserOrders(req, res, next) {
         const connection = await mysqlPool.getConnection();
 
         const [orderData] = await connection.query(
-            `SELECT U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate
+            `SELECT U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate 
             FROM users U
             JOIN \`order\` O ON O.idUser = U.idUser
             JOIN experiences E on E.idExperience = O.idExperience
-            WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NULL
+            WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NOT NULL
             ORDER BY U.idUser;`
-        ); //  Muestra TODAS las experiencias añadidas a la cesta (aún sin confirmar)
+        ); // Muestra solo las que están confirmadas
 
         console.log(orderData);
         console.log(idUser);
