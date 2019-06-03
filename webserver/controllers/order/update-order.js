@@ -9,6 +9,9 @@ const mysqlPool = require("../../../databases/mysql-pool");
  */
 async function updateOrder(req, res, next) {
     const orderData = {...req.body };
+    const { idOrder } = orderData;
+    const { units } = orderData;
+    const { comments } = orderData;
 
     const now = new Date();
     const orderDate = now
@@ -22,7 +25,7 @@ async function updateOrder(req, res, next) {
         await connection.query(`UPDATE \`order\` 
             SET units = '${units}', 
                 comments = '${comments}',
-                confirmedAt = orderDate
+                confirmedAt = '${orderDate}'
             WHERE idOrder = '${idOrder}';`);
 
         console.log("ID Order: ", req.idOrder);

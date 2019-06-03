@@ -8,10 +8,12 @@ const createOrder = require("../controllers/order/create-order");
 const showOrder = require("../controllers/order/show-orders");
 const showOrderConfirmed = require("../controllers/order/show-order-confirmed");
 const updateOrder = require("../controllers/order/update-order");
+const deleteOrder = require("../controllers/order/delete-order");
 
 router.post("/order", checkJwtToken, createOrder); // Crear order
 router.get("/order", checkJwtToken, showOrder); // Mostrar TODAS las order de un usuario
 router.get("/order/confirmed", checkJwtToken, showOrderConfirmed); // Mostrar solo las order CONFIRMADAS de un usuario
 router.put("/order", checkJwtToken, updateOrder); // Modifica la order
+router.delete("/order", checkJwtToken, deleteOrder); // Elimina la order
 
 module.exports = router;
