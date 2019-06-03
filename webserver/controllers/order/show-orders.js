@@ -16,7 +16,7 @@ async function showUserOrders(req, res, next) {
         const connection = await mysqlPool.getConnection();
 
         const [orderData] = await connection.query(
-            `SELECT U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate
+            `SELECT O.idOrder, U.idUser, E.idExperience, E.title, O.units, E.price, O.comments, O.orderDate
             FROM users U
             JOIN \`order\` O ON O.idUser = U.idUser
             JOIN experiences E on E.idExperience = O.idExperience
@@ -30,6 +30,7 @@ async function showUserOrders(req, res, next) {
 
         const data = orderData.map(orderItem => {
             return {
+                idOrder: orderItem.idOrder,
                 idUser: idUser,
                 idExperience: orderItem.idExperience,
                 title: orderItem.title,
@@ -37,6 +38,9 @@ async function showUserOrders(req, res, next) {
                 price: orderItem.price,
                 comments: orderItem.comments,
                 orderDate: orderItem.orderDate
+                    .toISOString()
+                    .substring(0, 19)
+                    .replace("T", " ")
             };
         });
 
