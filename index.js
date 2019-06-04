@@ -88,6 +88,12 @@ app.use((err, req, res, next) => {
         });
     }
 
+    // if (errorName === "HttpErrorResponse") {
+    //     return res.status(501).send({
+    //         message: err.message
+    //     });
+    // }
+
     return res.status(500).send({
         error: err.message
     });

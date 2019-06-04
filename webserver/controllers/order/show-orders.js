@@ -21,7 +21,7 @@ async function showUserOrders(req, res, next) {
             JOIN \`order\` O ON O.idUser = U.idUser
             JOIN experiences E on E.idExperience = O.idExperience
             WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NULL
-            ORDER BY U.idUser;`
+            ORDER BY O.orderDate;`
         ); //  Muestra TODAS las experiencias añadidas a la cesta (aún sin confirmar)
 
         console.log(orderData);

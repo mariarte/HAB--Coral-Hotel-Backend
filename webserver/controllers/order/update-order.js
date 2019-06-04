@@ -8,11 +8,11 @@ const mysqlPool = require("../../../databases/mysql-pool");
  * 2. Hace el update en DB
  */
 async function updateOrder(req, res, next) {
+    console.log({ LOQUESEA: req.body });
     const orderData = {...req.body };
     const { idOrder } = orderData;
     const { units } = orderData;
     const { comments } = orderData;
-
     const now = new Date();
     const orderDate = now
         .toISOString()
