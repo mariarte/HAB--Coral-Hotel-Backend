@@ -33,6 +33,7 @@ async function updateOrder(req, res, next) {
         connection.release();
 
         console.log("Datos: ", orderData);
+        console.log("orderDate: ", orderDate);
 
         console.log("ORDER CONFIRMADA");
 

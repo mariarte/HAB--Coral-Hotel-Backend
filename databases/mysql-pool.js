@@ -22,7 +22,7 @@ async function connect() {
         password: process.env.MYSQL_PASSWORD,
         database: process.env.MYSQL_DATABASE,
         port: process.env.MYSQL_PORT,
-        timezone: "Z",
+        // timezone: "Z",
         // debug: true,
         multipleStatements: true,
         ...(sslCertificateData && sslOptions)

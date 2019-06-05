@@ -21,7 +21,7 @@ async function showUserOrders(req, res, next) {
             JOIN \`order\` O ON O.idUser = U.idUser
             JOIN experiences E on E.idExperience = O.idExperience
             WHERE U.idUser = '${idUser}' AND O.confirmedAt IS NOT NULL
-            ORDER BY U.idUser;`
+            ORDER BY O.confirmedAt;`
         ); // Muestra solo las que están confirmadas
 
         console.log(orderData);
@@ -30,6 +30,7 @@ async function showUserOrders(req, res, next) {
 
         const data = orderData.map(orderItem => {
             return {
+                idOrder: orderItem.idOrder,
                 idUser: idUser,
                 idExperience: orderItem.idExperience,
                 title: orderItem.title,

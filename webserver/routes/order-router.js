@@ -14,6 +14,6 @@ router.post("/order", checkJwtToken, createOrder); // Crear order
 router.get("/order", checkJwtToken, showOrder); // Mostrar TODAS las order de un usuario
 router.get("/order/confirmed", checkJwtToken, showOrderConfirmed); // Mostrar solo las order CONFIRMADAS de un usuario
 router.put("/order", checkJwtToken, updateOrder); // Modifica la order
-router.delete("/order", checkJwtToken, deleteOrder); // Elimina la order
+router.delete("/order/:idOrder", checkJwtToken, deleteOrder); // Elimina la order
 
 module.exports = router;
