@@ -38,9 +38,6 @@ async function showUserOrders(req, res, next) {
                 price: orderItem.price,
                 comments: orderItem.comments,
                 orderDate: orderItem.orderDate
-                    .toISOString()
-                    .substring(0, 19)
-                    .replace("T", " ")
             };
         });
 

@@ -3,17 +3,17 @@
 const mysql = require("mysql2");
 const fs = require("fs");
 
-const sslCertificate = process.env.MYSQL_SSL_CERTIFICATE;
+// const sslCertificate = process.env.MYSQL_SSL_CERTIFICATE;
 
 async function connect() {
-    const sslCertificateData = sslCertificate ?
-        fs.readFileSync(sslCertificate) :
-        null;
-    const sslOptions = {
-        ssl: {
-            ca: sslCertificateData
-        }
-    };
+    // const sslCertificateData = sslCertificate ?
+    //     fs.readFileSync(sslCertificate) :
+    //     null;
+    // const sslOptions = {
+    //     ssl: {
+    //         ca: sslCertificateData
+    //     }
+    // };
 
     const options = {
         connectionLimit: 10,
@@ -24,8 +24,8 @@ async function connect() {
         port: process.env.MYSQL_PORT,
         // timezone: "Z",
         // debug: true,
-        multipleStatements: true,
-        ...(sslCertificateData && sslOptions)
+        multipleStatements: true
+            // ...(sslCertificateData && sslOptions)
     };
 
     console.log("HOST: ", process.env.MYSQL_HOST);

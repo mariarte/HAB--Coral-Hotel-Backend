@@ -19,10 +19,10 @@ async function createOrder(req, res, next) {
     // console.log("comments: ", orderData.comments);
 
     const now = new Date();
-    const orderDate = now
-        .toISOString()
-        .substring(0, 19)
-        .replace("T", " ");
+    const orderDate = now;
+    // .toISOString()
+    // .substring(0, 19)
+    // .replace("T", " ");
 
     const connection = await mysqlPool.getConnection();
 
