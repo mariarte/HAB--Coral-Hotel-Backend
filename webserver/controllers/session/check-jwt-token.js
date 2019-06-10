@@ -12,7 +12,7 @@ const { JWT_PASSWORD: authJwtSecret } = process.env;
  */
 async function checkJwtToken(req, res, next) {
     const { authorization } = req.headers;
-    console.log({ authorization }); // imprime JWT + token
+    // console.log({ authorization }); // imprime JWT + token
 
     /**
      * 1. Comprueba si el token existe en DB
@@ -33,7 +33,7 @@ async function checkJwtToken(req, res, next) {
         console.error("Token diferente");
         return res.status(401).send();
     }
-    console.log("Token: ", token);
+    // console.log("Token: ", token);
 
     try {
         const decoded = jwt.verify(token, authJwtSecret);
@@ -51,8 +51,8 @@ async function checkJwtToken(req, res, next) {
         req.claims = {
             idUser: decoded.idUser
         };
-        console.log("req.claims: ", req.claims);
-        console.log("Token perfecto!!!!!");
+        // console.log("req.claims: ", req.claims);
+        // console.log("Token perfecto!!!!!");
         return next();
     } catch (e) {
         console.error("ERROR");

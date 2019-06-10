@@ -1,6 +1,7 @@
 "use strict";
 
 const mysqlPool = require("../../../databases/mysql-pool");
+const dateFns = require("date-fns"); // Usando la librería date-fns
 
 /**
  * TODO: Crea las reservas del id, para ello:
@@ -13,16 +14,20 @@ async function createOrder(req, res, next) {
     const orderData = {...req.body };
     const { claims } = req;
     const { idUser } = claims;
-    // console.log("User: ", idUser);
-    // console.log("Id Experience:", orderData.idExperience);
-    // console.log("units: ", orderData.units);
-    // console.log("comments: ", orderData.comments);
+    // const time = dateFns.format(Date.now(), "hh:mm A");
+    // console.log("HORA: ", time);
 
-    const now = new Date();
-    const orderDate = now;
-    // .toISOString()
-    // .substring(0, 19)
-    // .replace("T", " ");
+    // const now = new Date();
+    // const orderDate = now
+    //     .toISOString()
+    //     .substring(0, 19)
+    //     .replace("T", " ");
+    const orderDate = dateFns
+        .parse(Date.now())
+        .toISOString()
+        .substring(0, 19)
+        .replace("T", " "); //=> Tue Feb 11 2014 11:30:30
+    console.log("FECHA DATE-FNS: ", orderDate);
 
     const connection = await mysqlPool.getConnection();
 

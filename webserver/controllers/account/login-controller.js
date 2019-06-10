@@ -91,10 +91,10 @@ async function checkLogin(req, res, next) {
             /**
              * 5. Envía la respuesta de petición al usuario
              */
-            console.log("***Ficha User en DB: ", fichaUser);
-            console.log({ resultToken });
-            console.log(token.idUser);
-            console.log("LOGIN OK");
+            // console.log("***Ficha User en DB: ", fichaUser);
+            // console.log({ resultToken });
+            // console.log(token.idUser);
+            // console.log("LOGIN OK");
             return res.status(200).json({ resultToken });
         }
 
