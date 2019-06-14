@@ -23,28 +23,19 @@ async function validate(payload) {
 }
 
 /**
- * TODO: Se modifica la cuenta de usario, para ello:
- * 1. Valida los datos que se introducen (fullName)
- * 2. Hace el update en DB
+ * TODO: Función que permite modificar la cuenta de usuario.
+ * Si no hay errores, http 204 y 500 en otro caso
  */
 async function updateUserProfile(req, res, next) {
     const userDataProfile = {...req.body };
     const { idUser } = req.claims;
 
-    /**
-     * 1. Valida los datos, usando la función creada para ello
-     */
     try {
         await validate(userDataProfile);
     } catch (e) {
         return res.status(400).send(e.message);
     }
 
-    /**
-     * 2. Hace la modificación en DB:
-     *         1. Conecta con la DB
-     *         2. Se modifican los datos introducidos
-     */
     const { fullName } = userDataProfile;
 
     try {

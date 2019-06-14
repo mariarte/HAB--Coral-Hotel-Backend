@@ -52,32 +52,19 @@ async function sendEmailRegistration(userEmail) {
 }
 
 /**
- * TODO: Crea la cuenta de usuario, para ello:
- * 1. Valida los datos que se introducen
- * 2. Convierte los datos como los necesite la DB
- * 3. Hace la inserción en DB
- * 4. Envía email de info al usuario
- * 5. Envía la respuesta de la petición al usuario, con la correcta creación de la cuenta
- * 6. Comprueba si el email ya existe en DB (para evitar duplicidades)
+ * TODO: Función que permite crear la cuenta de usuario.
+ * Enviando un email de confirmación al usuario.
+ * Si no hay errores, http 204 y 500 en otro caso
  */
 async function createAccount(req, res, next) {
     const accountData = req.body;
 
-    /**
-     * 1. Valida los datos, usando la función creada para ello
-     */
     try {
         await validateSchema(accountData);
     } catch (e) {
         return res.status(400).send(e.message);
     }
 
-    /**
-     * 2. Convierte los datos que necesita para la inserción:
-     *         1. Se obtiene la fecha actual para el campo: created_at y se formatea
-     *         2. Calcula el hash de la password enviada para almacenarla
-     * de forma segura en la base de datos
-     */
     const now = new Date();
     const securePassword = await bcrypt.hash(accountData.password, 10);
     const createdAt = now
@@ -85,12 +72,6 @@ async function createAccount(req, res, next) {
         .substring(0, 19)
         .replace("T", " ");
 
-    /**
-     * 3. Hace la inserción en DB:
-     *         1. Conecta con la DB
-     *         2. Se inserta los datos pasados
-     * 4. Envía email de info al usuario a traves de SendGrid
-     */
     const connection = await mysqlPool.getConnection();
 
     const consultaDB = `SELECT idUser,fullName, email, password, createdAt FROM users WHERE email = '${
@@ -109,9 +90,6 @@ async function createAccount(req, res, next) {
         connection.release();
         await sendEmailRegistration(accountData.email);
 
-        /**
-         * 5. Envía la respuesta de la petición al usuario
-         */
         console.log("CUENTA CREADA");
         return res.status(201).send();
     } catch (e) {
@@ -119,9 +97,6 @@ async function createAccount(req, res, next) {
             connection.release();
         }
 
-        /**
-         * 6. Comprueba si el email ya existe en la DB con gestion de errores customizada (Se evitan emails duplicados)
-         */
         if (e.code === "ER_DUP_ENTRY") {
             const userDuplicate = new EmailAlreadyExistError(
                 "Email duplicado: Ya existe en DB"

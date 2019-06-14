@@ -3,11 +3,8 @@
 const mysqlPool = require("../../../databases/mysql-pool");
 
 /**
- * TODO: Crea las experiencias, para ello:
- * 1. Gestiona los datos que llegan
- * 2. Conecta a la DB
- * 3. Hace el insert en DB
- * 4. Envía la petición al usuario
+ * TODO: Función que permite crear nuevas experiencias.
+ * Sino hay errores, http 201 y 500 en otro caso.
  */
 async function createExperience(req, res, next) {
     const experienceData = req.body;

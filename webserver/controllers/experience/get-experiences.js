@@ -3,11 +3,8 @@
 const mysqlPool = require("../../../databases/mysql-pool");
 
 /**
- * TODO: Busca las experiencias para enviar la petición al usuario:
- * 1. Conecta a la DB
- * 2. Consulta las experiences de la DB
- * 3. Recorre las experiences que se encuentran en DB
- * 4. Envía la petición al usuario
+ * TODO: Función que permite buscar las experiencias.
+ * http 200
  */
 async function getExperiences(req, res, next) {
     const connection = await mysqlPool.getConnection();

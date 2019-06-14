@@ -3,10 +3,8 @@
 const mysqlPool = require("../../../databases/mysql-pool");
 
 /**
- * TODO: Borra la cuenta de usuario, para ello:
- * 1. Conecta a la DB
- * 2. Consulta los datos de la DB y hace delete
- * 3. Envía mensaje de confirmación
+ * TODO: Función que permite borrar la cuenta de usuario.
+ * Si no hay errores, http 204 y 500 en otro caso
  */
 async function deleteUserProfile(req, res, next) {
     const userDataProfile = {...req.body };
