@@ -2,13 +2,13 @@
 
 require("dotenv").config(); // Importando DOTENV: para usar variables de entorno
 const bodyParser = require("body-parser"); // Importando libreria BODY-PARSER: para gestionar los datos que nos vienen por body
-const express = require("express"); // Importando EXPRESS
+const express = require("express");
 const routers = require("./webserver/routes");
-const mysqlPool = require("./databases/mysql-pool"); // Llamada al archivo mysql-pool.js
+const mysqlPool = require("./databases/mysql-pool");
 const app = express();
 
 process.on("uncaughtException", err => {
-    console.error("excepción inesperada", err.message, err);
+    console.error("Excepción inesperada", err.message, err);
 });
 
 process.on("unhandledRejection", err => {
@@ -88,12 +88,6 @@ app.use((err, req, res, next) => {
         });
     }
 
-    // if (errorName === "HttpErrorResponse") {
-    //     return res.status(501).send({
-    //         message: err.message
-    //     });
-    // }
-
     return res.status(500).send({
         error: err.message
     });
@@ -101,9 +95,9 @@ app.use((err, req, res, next) => {
 
 async function init() {
     try {
-        await mysqlPool.connect(); // Llamada a la función connect del archivo mysql-pool.js
+        await mysqlPool.connect();
     } catch (e) {
-        console.error(e); // Control errores
+        console.error(e);
         process.exit(1); // Para salir del proceso de error y le mandamos en codigo unix el 1
     }
 

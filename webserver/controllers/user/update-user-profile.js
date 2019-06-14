@@ -9,6 +9,8 @@ const mysqlPool = require("../../../databases/mysql-pool");
  * que se permite modificar:
  *  fullName: String
  *  Se usa el paquete Joi para validar: https://www.npmjs.com/package/joi
+ * @param {Object} payload Objeto a validar
+ * @return {Object} Nulo si los datos son válidos. Sino no son válidos arroja un error
  */
 async function validate(payload) {
     const schema = {

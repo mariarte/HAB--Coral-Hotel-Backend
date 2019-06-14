@@ -5,21 +5,31 @@ const mysqlPool = require("../../../databases/mysql-pool");
 /**
  * TODO: Busca las experiencias (por idExperience), que se pasan por parámetro,
  * para enviar la petición:
- * 1. Gestiona el parámetro que pasa el usuario
+ * 1. Recupera el id de experience para poder acceder a los datos
  * 2. Conecta a la DB
- * 3. Consulta los datos de la DB
+ * 3. Consulta los datos de esa experience en la DB
  * 4. Envía la petición al usuario
  */
 async function getExperienceDetail(req, res, next) {
+    /**
+     * Recupera el idExperience que ha "seleccionado" el usuario en ese momento,
+     * para acceder a los datos de la DB
+     */
     const experienceParam = req.params.idExperience;
-    console.log(req.params);
-    // const idExperience = req.params;
-    // console.log(idExperience);
 
+    /**
+     * 2. Conexión con DB
+     */
     const connection = await mysqlPool.getConnection();
 
+    /**
+     * 3. Se realiza la consulta a la DB para acceder a todas las propiedades de
+     * la experience elegida
+     */
     const [experienceDetail] = await connection.query(
-        `SELECT idExperience, name, title, description, price, image1, image2, image3, image4 FROM experiences WHERE idExperience= '${experienceParam}'`
+        `SELECT idExperience, name, title, description, price, image1, image2, image3, image4 
+        FROM experiences 
+        WHERE idExperience= '${experienceParam}'`
     );
     connection.release();
 
@@ -36,8 +46,10 @@ async function getExperienceDetail(req, res, next) {
             image4: experienceItem.image4
         };
     });
-    console.log([experienceDetail]);
 
+    /**
+     * 4. Envía la petición al usuario
+     */
     return res.status(200).send(experienceDetail);
 }
 

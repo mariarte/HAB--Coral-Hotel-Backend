@@ -15,6 +15,8 @@ sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
  *            Mínimo 3 y max 30 caracteres, usando regular expression: /^[a-zA-Z0-9]{3,30}$/
  *  fullName: String
  *  Se usa el paquete Joi para validar: https://www.npmjs.com/package/joi
+ * @param {Object} payload Objeto a validar
+ * @return {Object} Nulo si los datos son válidos. Sino no son válidos arroja un error
  */
 async function validateSchema(payload) {
     const schema = {
@@ -30,7 +32,8 @@ async function validateSchema(payload) {
 }
 
 /**
- * TODO: Envia un email de información al usuario, que la cuenta ha sido creada correctamente:
+ * TODO: Envia un email de información al usuario, que la cuenta
+ * ha sido creada correctamente:
  * @param {String} userEmail
  */
 async function sendEmailRegistration(userEmail) {
@@ -119,7 +122,6 @@ async function createAccount(req, res, next) {
         /**
          * 6. Comprueba si el email ya existe en la DB con gestion de errores customizada (Se evitan emails duplicados)
          */
-        //console.log("Error: Email duplicado");
         if (e.code === "ER_DUP_ENTRY") {
             const userDuplicate = new EmailAlreadyExistError(
                 "Email duplicado: Ya existe en DB"

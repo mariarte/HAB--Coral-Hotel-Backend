@@ -12,6 +12,8 @@ const UserNotExistError = require("../errors/user-not-exist-error");
  *  password: Letras (mayúsculas y minúsculas) y número.
  *            Mínimo 3 y max 30 caracteres, usando regular expression: /^[a-zA-Z0-9]{3,30}$/
  *  Se usa el paquete Joi para validar: https://www.npmjs.com/package/joi
+ *  @param {Object} payload Objeto a validar
+ *  @return {Object} Nulo si los datos son válidos. Sino no son válidos arroja un error
  */
 async function validateData(payload) {
     const schema = {
@@ -91,16 +93,12 @@ async function checkLogin(req, res, next) {
             /**
              * 5. Envía la respuesta de petición al usuario
              */
-            // console.log("***Ficha User en DB: ", fichaUser);
-            // console.log({ resultToken });
-            // console.log(token.idUser);
-            // console.log("LOGIN OK");
             return res.status(200).json({ resultToken });
         }
 
         /**
-         * 6. Comprueba si el email existe en la DB con gestión de errores customizada.
-         * Usando la clase UserNotExistError
+         * 6. Comprueba si el email existe en la DB con gestión de
+         * errores customizada.Usando la clase UserNotExistError
          */
         console.error("Error: El usuario no se encuentra en DB");
         const userNotExist = new UserNotExistError(

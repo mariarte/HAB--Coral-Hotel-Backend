@@ -9,10 +9,8 @@ const mysqlPool = require("../../../databases/mysql-pool");
  * 3. Envía mensaje de confirmación
  */
 async function deleteOrder(req, res, next) {
-    // const orderData = {...req.body };
-    // const { idOrder } = orderData;
     const idOrderParam = req.params.idOrder;
-    console.log(idOrderParam);
+
     try {
         const connection = await mysqlPool.getConnection();
 
@@ -20,7 +18,6 @@ async function deleteOrder(req, res, next) {
             `DELETE FROM \`order\` WHERE idOrder = '${idOrderParam}';`
         );
         connection.release();
-        console.log(idOrderParam);
         console.log("ORDER BORRADA");
 
         return res.status(204).send("Borrado de la DB");

@@ -7,11 +7,10 @@ const mysqlPool = require("../../../databases/mysql-pool");
  * 1. Gestiona los datos que llegan
  * 2. Conecta a la DB
  * 3. Hace el insert en DB
- * 4. Envía 201 al usuario
+ * 4. Envía la petición al usuario
  */
 async function createExperience(req, res, next) {
     const experienceData = req.body;
-    // console.log(experienceData);
 
     const connection = await mysqlPool.getConnection();
     const sqlInsercion = "INSERT INTO experiences SET ?";
