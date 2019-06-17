@@ -24,6 +24,20 @@ async function connect() {
         port: process.env.MYSQL_PORT,
         timezone: "Z",
         // debug: true,
+        typeCast(field, next) {
+            // init typeCast: ESTA FUNCIÓN ES LO NUEVO!!!!
+            // https://github.com/sidorares/node-mysql2/issues/262
+            if (field.type === "DATETIME") {
+                const utcTime = Math.floor(
+                    new Date(`${field.string()} UTC`).getTime() / 1000
+                );
+                const fixedDate = new Date(0);
+                fixedDate.setUTCSeconds(utcTime);
+
+                return fixedDate;
+            }
+            return next();
+        }, // HASTA AQUI: end typeCaset
         multipleStatements: true
             // ...(sslCertificateData && sslOptions)
     };
