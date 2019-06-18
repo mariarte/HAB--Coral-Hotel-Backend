@@ -103,9 +103,8 @@ async function init() {
 
     const port = process.env.PORT;
     app.listen(port, () => {
-        // Escuchando el puerto
         console.log(`Server running and listening on port ${port}`);
     });
 }
 
-init(); // Autollamada de la función init
+init();

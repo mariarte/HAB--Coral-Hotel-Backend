@@ -25,7 +25,7 @@ async function connect() {
         timezone: "Z",
         // debug: true,
         typeCast(field, next) {
-            // init typeCast: ESTA FUNCIÓN ES LO NUEVO!!!!
+            // init typeCast:
             // https://github.com/sidorares/node-mysql2/issues/262
             if (field.type === "DATETIME") {
                 const utcTime = Math.floor(
@@ -37,7 +37,7 @@ async function connect() {
                 return fixedDate;
             }
             return next();
-        }, // HASTA AQUI: end typeCaset
+        },
         multipleStatements: true
             // ...(sslCertificateData && sslOptions)
     };

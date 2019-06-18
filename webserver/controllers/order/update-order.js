@@ -13,19 +13,11 @@ async function updateOrder(req, res, next) {
     const { units } = orderData;
     const { comments } = orderData;
 
-    // const now = new Date();
-    // const orderDate = now
-    //     .toISOString()
-    //     .substring(0, 19)
-    //     .replace("T", " ");
-    // console.log("ORDER DATE: ", orderDate);
-
     const fecha = dateFns.parse(Date.now());
     const orderDate = fecha
         .toISOString()
         .substring(0, 19)
         .replace("T", " ");
-    console.log("FECHA DATE-FNS: ", orderDate); //***************** */
 
     try {
         const connection = await mysqlPool.getConnection();

@@ -74,9 +74,8 @@ async function createAccount(req, res, next) {
 
     const connection = await mysqlPool.getConnection();
 
-    const consultaDB = `SELECT idUser,fullName, email, password, createdAt FROM users WHERE email = '${
-    accountData.email
-  }'`;
+    const consultaDB = `SELECT idUser,fullName, email, password, createdAt 
+                        FROM users WHERE email = '${accountData.email}'`;
     const sqlInsercion = "INSERT INTO users SET ?";
 
     try {

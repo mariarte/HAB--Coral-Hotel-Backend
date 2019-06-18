@@ -12,18 +12,11 @@ async function createOrder(req, res, next) {
     const { claims } = req;
     const { idUser } = claims;
 
-    // const now = new Date();
-    // const orderDate = now
-    //     .toISOString()
-    //     .substring(0, 19)
-    //     .replace("T", " ");
-
     const orderDate = dateFns
         .parse(Date.now())
         .toISOString()
         .substring(0, 19)
         .replace("T", " ");
-    console.log("FECHA DATE-FNS: ", orderDate);
 
     try {
         const connection = await mysqlPool.getConnection();
