@@ -74,7 +74,7 @@ Este proyecto ha sido creado con:
 
 ## Ayuda adicional 🙏🏻
 
-Para obtener más ayuda sobre Angular CLI usa `node help` o consulte [Node js](https://nodejs.org/es/docs/).
+Para obtener más ayuda sobre Node Js usa `node help` o consulte [Node js](https://nodejs.org/es/docs/).
 
 ## Autores ✒️
 
