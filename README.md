@@ -24,6 +24,12 @@ Mire **Deployment** para conocer como desplegar el proyecto.
 
 ### Pre-requisitos 📋
 
+- _Tener `node js v.10.14.1` instalado_
+
+```bash
+npm install -g node
+```
+
 - _Tener una cuenta en `Sendgrid`_ [Sendgrid](https://sendgrid.com)
 
 - _Tener una cuenta en `Cloudinary`_ [Cloudinary](https://cloudinary.com)
