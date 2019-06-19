@@ -23,7 +23,6 @@ async function showUserOrders(req, res, next) {
         connection.release();
 
         const data = orderData.map(orderItem => {
-            console.log(orderItem.confirmedAt);
             return {
                 idOrder: orderItem.idOrder,
                 idUser: idUser,
