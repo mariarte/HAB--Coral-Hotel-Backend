@@ -29,6 +29,8 @@ async function createOrder(req, res, next) {
             comments: orderData.comments
         });
 
+        console.log("*", orderData.comments, "*");
+
         connection.release();
 
         console.log("ORDER CREADA");
