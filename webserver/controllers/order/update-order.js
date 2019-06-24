@@ -28,6 +28,7 @@ async function updateOrder(req, res, next) {
                 confirmedAt = '${orderDate}'
             WHERE idOrder = '${idOrder}';`);
 
+        console.log("*", comments, "*");
         connection.release();
         console.log("ORDER CONFIRMADA");
 
