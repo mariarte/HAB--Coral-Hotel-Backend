@@ -72,6 +72,11 @@ Ejecute `ng build` para construir el proyecto. Los artefactos de construcción s
 _Puede usar la versión desplegada de la app con todas sus funcionalidades en:_
 [The Coral Hotel](https://coral-hotel.firebaseapp.com/)
 
+## Mejoras en desarrollo 👩🏾‍💻
+
+- Añadir funcionalidad fechas: El cliente podrá elegir la fecha exacta de la reserva.
+- Introducción del ORM _Objection Js_ para gestionar las consultas de MySQL
+
 ## Construido con 🛠️
 
 Este proyecto ha sido creado con:
