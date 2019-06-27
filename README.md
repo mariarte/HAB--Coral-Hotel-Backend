@@ -5,7 +5,7 @@ Plataforma enfocada al turismo especializado, tales como hoteles o alojamientos 
 Los usuarios podrán acceder a la aplicación desde un dispositivo (tableta o PC) que el hotel pondrá a su disposición en cada habitación.  
 El cliente puede encontrar cierta información de interés que hotel considere oportuna, podrá reservar experiencias de una manera personalizada y rápida, acceder a sus reservas y llevar un control de los gastos o incluso, llamar a recepción sin teléfono propio.
 
-![The Coral Hotel](https://res.cloudinary.com/cloudmaria/image/upload/v1560808523/image1_snvvn0.png)
+![The Coral Hotel](https://res.cloudinary.com/cloudmaria/image/upload/v1560809192/image1_zogolq.png)
 
 ## Características 📝
 
